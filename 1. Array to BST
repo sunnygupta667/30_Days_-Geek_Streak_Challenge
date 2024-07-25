@@ -1,8 +1,12 @@
 Code:
+
 class Solution {
+    //takes a sorted array nums and calls the solve method to convert it into a BST.
     public Node sortedArrayToBST(int[] nums) {
        return solve(0 , nums.length - 1 , nums);
     }
+
+  //  This method does the actual work of converting the sorted array into a BST
     public Node solve(int l , int r , int[] nums){
         if(l > r)
             return null;
