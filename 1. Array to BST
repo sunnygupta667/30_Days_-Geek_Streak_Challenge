@@ -1,0 +1,20 @@
+Code:
+class Solution {
+    public Node sortedArrayToBST(int[] nums) {
+       return solve(0 , nums.length - 1 , nums);
+    }
+    public Node solve(int l , int r , int[] nums){
+        if(l > r)
+            return null;
+        int mid = l + (r - l)/2;
+        Node root = new Node(nums[mid]);
+        root.left = solve(l , mid - 1 , nums);
+        root.right = solve(mid + 1 , r , nums);
+        
+        return root;
+    }
+} 
+Explanation:
+The sortedArrayToBST method initializes the process by calling solve with the full range of the array.
+The solve method breaks down the array into smaller subarrays, finds the middle elements, creates nodes, and attaches left and right subtrees recursively.
+This process ensures that the tree is balanced, as the middle element is always chosen as the root, evenly distributing elements on both sides.
