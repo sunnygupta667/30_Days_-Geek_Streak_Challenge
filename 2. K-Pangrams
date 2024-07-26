@@ -1,0 +1,33 @@
+Code:
+class Solution {
+    boolean kPangram(String str, int k) {
+        // code here
+        HashSet<Character> set = new HashSet<>();
+        int n = str.length();
+        int count=0;
+        if(n<26) return false;
+        
+        for(int i=0;i<n;i++)
+        {
+            char ch = str.charAt(i);
+            if(ch==' ') continue;
+            else
+            {
+                set.add(ch); 
+                count++;
+            }
+        }
+    
+        if(count<26) return false;
+        if(k+set.size()>=26 || set.size()==26) return true;
+     return false;   
+    
+    }
+}
+
+Explanation:
+Count Characters: The code counts how many times each letter appears in the string (ignoring spaces).
+Check Minimum Length: If the string has fewer than 26 non-space characters, it can't be a pangram, so return false.
+Check Existing Pangram: If the string already has all 26 letters, return true.
+Calculate Needed Letters: Determine how many different letters are missing to complete the alphabet.
+Check If Changes Are Enough: If we can replace enough characters to add the missing letters (without exceeding k changes), return true. Otherwise, return false.
