@@ -1,0 +1,40 @@
+Code:
+class Solution {
+    static int countMin(String str) {
+        int n = str.length();
+        int[][] dp = new int[n][n];
+        // Initialize the diagonal elements 
+        for (int i = 0; i < n; i++) {
+            dp[i][i] = 1;
+        }
+        for (int len = 2; len <= n; len++) {
+            for (int i = 0; i < n - len + 1; i++) {
+                int j = i + len - 1;
+                
+                // If characters at i and j are the same
+                if (str.charAt(i) == str.charAt(j)) {
+                    dp[i][j] = dp[i + 1][j - 1] + 2;
+                } 
+                // If characters at i and j are different
+                else {
+                    dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        return n - dp[0][n - 1];
+    }
+}
+Explanation:
+Initialization:
+n is the length of the string str.
+Create a 2D array dp of size n x n to store the length of the longest palindromic subsequence (LPS) for substrings of str.
+Base Case:
+Each character in the string is a palindrome of length 1. So, set dp[i][i] = 1 for all i.
+Fill DP Table:
+For each substring length from 2 to n:
+Check all possible substrings of that length.
+If the characters at the start (i) and end (j) of the substring are the same, then dp[i][j] = dp[i + 1][j - 1] + 2.
+If they are different, then dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]).
+Result:
+The value dp[0][n - 1] will be the length of the longest palindromic subsequence of the entire string.
+The minimum number of deletions required to make the string a palindrome is n - dp[0][n - 1].
