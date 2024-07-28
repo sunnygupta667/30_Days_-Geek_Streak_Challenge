@@ -1,0 +1,29 @@
+Code:
+class Solution {
+    String removeDups(String str) {
+       
+       // LinkedHashSet maintains insertion order and ensures uniqueness 
+        Set<Character>  charSet = new  LinkedHashSet<>();
+        
+       // Convert string to char array for easier iteration
+        char[]  strArray = str.toCharArray();
+       
+       // Add each character to the set
+      // Duplicates are automatically not added due to set property 
+        for(char eachLetter : strArray){
+            charSet.add(eachLetter);
+        }
+        
+      // StringBuilder for efficient string construction
+        StringBuilder  sb = new StringBuilder();
+        
+    // Append each unique character to the StringBuilder
+    // Order is preserved due to LinkedHashSet
+        for(char ch : charSet){
+            sb.append(ch);
+        }
+        
+         // Convert StringBuilder to String and return
+        return sb.toString();
+    }
+}
