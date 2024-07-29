@@ -1,0 +1,41 @@
+Code: 
+class Solution {
+    public int helper(int[] num) {
+        int count = 0;
+        for (int i : num) {
+            if (i == 1) count++;
+        }
+        return count;
+    }
+
+    public int rowWithMax1s(int arr[][]) {
+        int maxRowIndex = -1;
+        int maxCount = 0;
+        for (int i = 0; i < arr.length; i++) {
+            int count = helper(arr[i]);
+            if (count > maxCount) {
+                maxCount = count;
+                maxRowIndex = i;
+            }
+        }
+        return maxRowIndex;
+    }
+}
+Explanation
+helper method: Counts the number of 1s in a given row.
+rowWithMax1s method: Finds which row in the matrix has the most 1s.
+Example
+Given the matrix:
+0 1 0
+1 1 0
+0 0 1
+helper counts the 1s in each row:
+Row 0: 1 one
+Row 1: 2 ones
+Row 2: 1 one
+rowWithMax1s finds that Row 1 has the most 1s, so it returns 1 (the index of Row 1).
+
+
+
+
+
