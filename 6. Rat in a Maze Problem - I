@@ -1,0 +1,38 @@
+class Solution {
+    public ArrayList<String> findPath(int[][] mat) {
+        // Your code here
+        int n=mat.length;
+        ArrayList<String> paths=new ArrayList<>();
+        possiblepath(mat,paths,new StringBuilder(),n,0,0);
+        
+        return paths;
+    }
+    
+    public static void possiblepath(int mat[][],ArrayList<String> paths,StringBuilder sb,int n,int i,int j)
+    {
+        if(i==n-1 && j==n-1 && mat[i][j]==1)
+        {
+            paths.add(sb.toString());
+            return;
+        }
+        
+        if(i<0 || j<0 || i>=n || j>=n || mat[i][j]==0) return;
+        
+        mat[i][j]=0;
+        
+        possiblepath(mat,paths,sb.append("D"),n,i+1,j);
+        sb.deleteCharAt(sb.length()-1);
+        
+        possiblepath(mat,paths,sb.append("L"),n,i,j-1);
+        sb.deleteCharAt(sb.length()-1);
+        
+        possiblepath(mat,paths,sb.append("R"),n,i,j+1);
+        sb.deleteCharAt(sb.length()-1);
+        
+        possiblepath(mat,paths,sb.append("U"),n,i-1,j);
+        sb.deleteCharAt(sb.length()-1);
+        
+        mat[i][j]=1;
+        
+    }
+}
