@@ -1,0 +1,35 @@
+
+class Solution {
+    public String longestCommonPrefix(String arr[]) {
+        // code here
+          if (arr == null || arr.length == 0) return "-1";
+    String result = "";
+    
+    for (int i = 0; i < arr[0].length(); i++) {
+        char first = arr[0].charAt(i);
+        
+        for (int j = 1; j < arr.length; j++) {
+            if (i >= arr[j].length() || arr[j].charAt(i) != first) {
+                return result;
+            }
+        }
+        
+        result += first;
+    }
+    
+   return result.isEmpty() ? "-1" : result;
+    }
+}
+
+Explanation: 
+Initial Check:
+If the input array is null or empty, the method immediately returns -1.
+Iterate Over Characters of the First String:
+The method loops through each character of the first string in the array. This string serves as the reference for comparison.
+Compare with Other Strings:
+For each character in the first string, the method checks if the same character exists at the same position in all other strings in the array:
+If a string is shorter than the current character position (i), or if the character doesn't match the first string, the method returns the prefix found so far.
+Building the Prefix:
+If all strings share the same character at position i, that character is added to the result.
+Final Result:
+If the method completes the loop, it returns the accumulated prefix. If no prefix is found (i.e., result is empty), it returns -1.
