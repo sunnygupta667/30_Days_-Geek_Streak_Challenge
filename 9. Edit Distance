@@ -1,0 +1,43 @@
+class Solution {
+    public int editDistance(String str1, String str2) {
+         int n = s.length();
+         int m  = t.length();
+         int dp[][] = new int[n+1][m+1];
+         
+          for(int i=0; i<n+1; i++){
+              for(int j=0; j<m+1; j++){
+                  if(i == 0){
+                      dp[i][j] = j;
+                  }
+                  if(j ==0){
+                      dp[i][j] = i;
+                  }
+              }
+          }
+           
+          
+          for(int i=1; i<n+1; i++){
+              for(int j=1; j<m+1; j++){
+                  if(s.charAt(i-1) == t.charAt(j-1)){
+                       dp[i][j] = dp[i-1][j-1];
+                  }else{
+                       dp[i][j] = Math.min(dp[i-1][j],Math.min(dp[i][j-1], dp[i-1][j-1])) + 1;
+                  }
+              }
+          }
+          return dp[n][m];
+    }
+}
+
+Explanation:
+Create a Table:
+The code creates a table (a 2D array called dp) where each cell dp[i][j] will eventually tell you the minimum number of changes needed to turn the first i characters of str1 into the first j characters of str2.
+Filling in the Table:
+First, the code fills in the edges of the table:
+If one string is empty (either str1 or str2), you need to either insert or delete all the characters of the other string. That’s why the first row and first column are filled with numbers like 0, 1, 2, 3,... representing the number of changes needed.
+Comparing Characters:
+Then, for each combination of characters in str1 and str2, the code checks:
+If the characters are the same, no new change is needed, so it carries over the number from the previous step.
+If the characters are different, the code considers three possible actions (inserting, deleting, or replacing) and chooses the one with the least changes.
+Final Answer:
+After filling in the entire table, the answer (the minimum number of changes needed) is found in the bottom-right corner of the table (dp[n][m]).
