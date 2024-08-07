@@ -1,0 +1,24 @@
+class Solution {
+    public long kthElement(int k, int arr1[], int arr2[]) {
+        int i = 0;
+        int[] arr3 = new int[arr1.length + arr2.length];
+        
+        // Copy elements of arr1 into arr3
+        for (int a : arr1) {
+            arr3[i] = a;
+            i++;
+        }
+        
+        // Copy elements of arr2 into arr3
+        for (int b : arr2) {
+            arr3[i] = b;
+            i++;
+        }
+        
+        // Sort the merged array
+        Arrays.sort(arr3);
+        
+        // Return the k-th element (1-indexed, so we use k-1)
+        return arr3[k - 1];
+    }
+}
