@@ -1,0 +1,15 @@
+class Solution {
+    boolean ans =true;
+    boolean isSumTree(Node root) {
+        // Your code here
+        helper(root);
+        return ans;
+    }
+    int helper(Node root){
+        if (root==null)return 0;
+        int left= helper(root.left);
+        int right = helper(root.right);
+        if((root.left!=null || root.right!=null)&& left+right!=root.data) ans = false;
+        return root.data+left + right;
+    }
+}
