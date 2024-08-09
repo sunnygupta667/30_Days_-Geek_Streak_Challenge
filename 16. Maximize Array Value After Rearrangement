@@ -1,0 +1,15 @@
+class Solution {
+
+    int Maximize(int arr[]) {
+        // Complete the function
+        Arrays.sort(arr);
+        int i=0, mod= (int)1e9+7;
+        long sum=0;
+        for (int nums: arr){
+            sum =(sum+i*(long)nums)%mod;
+            i++;
+        }
+        
+        return (int)sum;
+    }
+}
