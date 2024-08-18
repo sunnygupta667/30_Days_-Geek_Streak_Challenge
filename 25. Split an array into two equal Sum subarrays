@@ -1,0 +1,15 @@
+class Solution {
+    public boolean canSplit(int arr[]) {
+        // code here
+        int t =0;
+        for(int i =0; i<arr.length; i++){
+            t+=arr[i];
+        }
+        int s=0;
+        for(int i= 0; i<arr.length;i++){
+            s+=arr[i];
+            if((t-s)==s)return true;
+        }
+        return false;
+    }
+}
