@@ -1,0 +1,44 @@
+class Solution {
+    int max = 0;
+
+    public int minTime(Node root, int target) {
+        Stack<Node> st = new Stack<>();
+        find(root, st, target);
+
+        Node parent = null;
+        int j=0;
+        while (!st.isEmpty()) {
+            Node current = st.pop();
+            distance(current, j++, parent);
+            parent = current;
+        }
+
+        return max;
+    }
+
+    void distance(Node root, int k, Node parent) {
+        if (root == null) {
+            max = Math.max(k - 1, max);
+            return;
+        }
+
+        if (root.left != parent)
+            distance(root.left, k + 1, root);
+        if (root.right != parent)
+            distance(root.right, k + 1, root);
+    }
+
+    boolean find(Node root, Stack<Node> st, int target) {
+        if (root == null)
+            return false;
+        if (root.data == target) {
+            st.push(root);
+            return true;
+        }
+        st.push(root);
+        if (find(root.left, st, target) || find(root.right, st, target))
+            return true;
+        st.pop();
+        return false;
+    }
+}
